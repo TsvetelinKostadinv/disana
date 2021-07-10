@@ -1,2 +1,2 @@
 # DiscreteAnalysis
-A take on implementing discrete analysis library
+A take on implementing **dis**crete **ana**lysis library
