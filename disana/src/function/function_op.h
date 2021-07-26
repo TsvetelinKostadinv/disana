@@ -2,8 +2,8 @@
 #include "function.h"
 #include "function_impl.h"
 
-#include <cassert>
 #include <memory>
+#include "util/disassert.h"
 
 namespace disana
 {
@@ -12,15 +12,16 @@ class PlusFunction : public virtual SingleVariableFunction
 public:
     PlusFunction(const SingleVariableFunction& lhs,
                  const SingleVariableFunction& rhs)
-        : SingleVariableFunction(lhs.getArgName()), lhs(lhs), rhs(rhs)
+        : SingleVariableFunction(
+              lhs.getArgName(),
+              [=](double value) { return lhs(value) + rhs(value); }),
+          lhs(lhs),
+          rhs(rhs)
     {
-        assert(lhs.getArgName() == rhs.getArgName() ||
-               lhs.getArgName() == "_" ||
-               rhs.getArgName() == "_");  // temporary
-
-        evaluation = [=](double value) {
-            return lhs(value) + rhs(value);
-        };
+        disassert(lhs.getArgName() == rhs.getArgName() ||
+                      lhs.getArgName() == "_" || rhs.getArgName() == "_",
+                  "The functions have to have the same argument or be "
+                  "constant");  // temporary
     }
     virtual ~PlusFunction() = default;
 

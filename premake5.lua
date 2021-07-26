@@ -4,7 +4,8 @@ workspace "disana"
 		"Debug",
 		"Release",
 		"Dist",
-    "Testing"
+    "Testing",
+    "Full-Test"
 	}
 
   platforms
