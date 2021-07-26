@@ -1,4 +1,4 @@
-project "tests"
+project "disana-tests"
   kind "ConsoleApp"
   language "C++"
   cppdialect "C++17"
@@ -11,13 +11,15 @@ project "tests"
   {
     "src/**.h",
     "src/**.cpp",
+    "%{wks.location}/lib/catch2/extras/catch_amalgamated.cpp",
     ".clang-format"
   }
 
   includedirs
   {
     "src",
-    "%{wks.location}/disana/src"
+    "%{wks.location}/disana/src",
+    "%{includeDir.catch2}"
   }
 
   links
