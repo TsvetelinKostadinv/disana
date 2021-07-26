@@ -1,0 +1,3 @@
+[submodule "lib"]
+	path = temp
+	url = https://github.com/catchorg/Catch2.git
