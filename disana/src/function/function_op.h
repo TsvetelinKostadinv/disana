@@ -20,6 +20,14 @@ public:
     }
     virtual ~PlusFunction() = default;
 
+    virtual SingleVariableFunction derivative(
+        double d = 0.001,
+        DerivationType derType =
+            DerivationType::DER_TYPE_CENTRAL) const override
+    {
+        return lhs.derivative(d, derType) + rhs.derivative(d, derType);
+    }
+
 protected:
     const SingleVariableFunction lhs;
     const SingleVariableFunction rhs;

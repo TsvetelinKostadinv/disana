@@ -10,9 +10,8 @@ using ArgumentValue = double;
 class SingleVariableFunction
 {
 public:
-    SingleVariableFunction(
-        const std::function<double(double)> evaluation =
-            [](double value) { return value; })
+    SingleVariableFunction(const std::function<double(double)> evaluation =
+                               [](double value) { return value; })
         : evaluation(evaluation)
     {
     }
@@ -31,19 +30,7 @@ public:
         double d = 0.001,
         DerivationType derType = DerivationType::DER_TYPE_CENTRAL) const
     {
-        switch (derType)
-        {
-            case DerivationType::DER_TYPE_FORWARD:
-                return (evaluation(value) - evaluation(value + d)) / d;
-            case DerivationType::DER_TYPE_BACKWARD:
-                return (evaluation(value - d) - evaluation(value)) / d;
-            case DerivationType::DER_TYPE_CENTRAL:
-                return (evaluation(value - d) - evaluation(value + d)) / 2 / d;
-            default:  // impossible unless we have missed a case in the
-                      // derivation type
-                disimpossible("Unrecognised derivation type!");
-                return 0.0f;
-        }
+        return derivative(d, derType)(value);
     }
 
     virtual SingleVariableFunction derivative(
