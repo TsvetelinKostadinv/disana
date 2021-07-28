@@ -13,15 +13,10 @@ public:
     PlusFunction(const SingleVariableFunction& lhs,
                  const SingleVariableFunction& rhs)
         : SingleVariableFunction(
-              lhs.getArgName(),
               [=](double value) { return lhs(value) + rhs(value); }),
           lhs(lhs),
           rhs(rhs)
     {
-        disassert(lhs.getArgName() == rhs.getArgName() ||
-                      lhs.getArgName() == "_" || rhs.getArgName() == "_",
-                  "The functions have to have the same argument or be "
-                  "constant");  // temporary
     }
     virtual ~PlusFunction() = default;
 

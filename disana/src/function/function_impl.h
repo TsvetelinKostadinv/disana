@@ -7,7 +7,7 @@ class Constant : public virtual SingleVariableFunction
 {
 public:
     Constant(double constant)
-        : SingleVariableFunction("_", [=](double _) { return constant; }),
+        : SingleVariableFunction([=](double _) { return constant; }),
           constant(constant)
     {
     }
@@ -21,10 +21,7 @@ protected:
 class Identity : public virtual SingleVariableFunction
 {
 public:
-    Identity(const ArgumentName& argName)
-        : SingleVariableFunction(argName, [](double value) { return value; })
-    {
-    }
+    Identity() : SingleVariableFunction([](double value) { return value; }) {}
     virtual ~Identity() = default;
 };
 }  // namespace disana
